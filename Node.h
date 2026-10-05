@@ -7,13 +7,13 @@ class Node
 {
 public:
     // CONSTRUCTOR
-    Node();
 
     // CONST MEMBER FUNCTIONS
     virtual double evaluate() const;
     virtual std::string postfix() const;
 
     // SPECIAL MEMBER FUNCTIONS
+    virtual ~Node() = default;
 
 protected:
 private:
