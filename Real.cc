@@ -1,4 +1,5 @@
 #include "Real.h"
+#include <iomanip>
 
 using namespace std;
 
@@ -39,7 +40,9 @@ double Real::evaluate() const
 
 string Real::postfix() const
 {
-    return "   ";
+    stringstream ss {};
+    ss << fixed << setprecision(3) << value;
+    return ss.str();
 }
 
 //--------------------------------------------------
