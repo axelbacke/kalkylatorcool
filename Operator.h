@@ -6,15 +6,15 @@
 class Operator : public Node
 {
 public:
-    // CONSTRUCTORS.
-    Operator(Node* l, Node* r);
-
     // SPECIAL MEMBER FUNCTIONS.
 
     // CONST MEMBER FUNCTIONS.
 
     // NON-CONST MEMBER FUNCTIONS.
 protected:
+    // CONSTRUCTOR
+    Operator(Node* l, Node* r);
+
     Node* left;
     Node* right;
 private:
