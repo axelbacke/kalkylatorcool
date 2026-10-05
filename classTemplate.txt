@@ -1,0 +1,19 @@
+#ifndef ******_H
+#define ******_H
+
+class ****** : public PARENT
+{
+public:
+    // CONSTRUCTORS.
+
+    // SPECIAL MEMBER FUNCTIONS.
+
+    // CONST MEMBER FUNCTIONS.
+
+    // NON-CONST MEMBER FUNCTIONS.
+protected:
+private:
+
+}
+
+#endif
