@@ -7,7 +7,7 @@ class Subtraction : public Operator
 {
 public:
     // CONSTRUCTORS.
-    Subtraction();
+    Subtraction(Node* left, Node* right);
 
     // SPECIAL MEMBER FUNCTIONS.
 

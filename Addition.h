@@ -7,7 +7,7 @@ class Addition : public Operator
 {
 public:
     // CONSTRUCTORS.
-    Addition();
+    Addition(Node* left, Node* right);
 
     // SPECIAL MEMBER FUNCTIONS.
 
