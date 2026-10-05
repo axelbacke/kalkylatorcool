@@ -9,12 +9,6 @@
 //------------------------------------
 #include "catch.hpp"
 
-TEST_CASE("Operator")
-{
-  Node* l {};
-  Node* r {};
-  Operator op {l, r};
-}
 
 TEST_CASE("operand real")
 {
@@ -48,13 +42,20 @@ TEST_CASE("operand int")
   CHECK_THROWS(new Integer{});
 }
 
-
 #if 0 // Flytta ned denna rad fÃ¶r att aktivera nÃ¤sta TEST_CASE
+
 
 TEST_CASE("addition")
 // TEST_CASE is like a loop doing one SECTION each iteration
 // meaning we get a fresh "pi" and "e" for each section
 {
+  SECTION("Constructor test")
+  {
+    Node* l {};
+    Node* r {};
+    Addition{l, r};
+  }
+  
   // Done each iteration of the TEST_CASE
   Node* pi = new Real{3.14};
   Node* e = new Real{2.72};
@@ -81,6 +82,7 @@ TEST_CASE("addition")
   // Doing the actual deallocation is your task once you have suitable
   // destructors.
 }
+
 
 // If catch report 0.42 != 0.42 you are likely to have a small
 // rounding error in some invisible decimal place. In such case you

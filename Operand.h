@@ -2,6 +2,8 @@
 #define OPERAND_H
 
 #include "Node.h"
+#include <sstream>
+
 
 class Operand : public Node
 {

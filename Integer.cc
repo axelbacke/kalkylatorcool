@@ -41,7 +41,9 @@ double Integer::evaluate() const
 
 string Integer::postfix() const
 {
-    return "   ";
+    stringstream ss {};
+    ss << value;
+    return ss.str();
 }
 //--------------------------------------------------
 // END OF MEMBER FUNCTIONS -------------------------
