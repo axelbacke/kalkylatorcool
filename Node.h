@@ -16,10 +16,7 @@ public:
     // SPECIAL MEMBER FUNCTIONS
 
 protected:
-
 private:
-    Node* left;
-    Node* right;
 
 }
 
