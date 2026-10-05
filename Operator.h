@@ -1,6 +1,8 @@
 #ifndef OPERATOR_H
 #define OPERATOR_H
 
+#include "Node.h"
+
 class Operator : public Node
 {
 public:
@@ -17,6 +19,6 @@ protected:
     Node* right;
 private:
 
-}
+};
 
 #endif

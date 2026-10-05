@@ -1,6 +1,5 @@
 #include "Operator.h"
 
-
 using namespace std;
 
 //--------------------------------------------------
@@ -17,7 +16,7 @@ using namespace std;
 //--------------------------------------------------
 
 //CONSTRUCTOR:
-Operator()
+Operator::Operator(Node* l, Node* r)
     : left {l}, right {r}
 {}
 
