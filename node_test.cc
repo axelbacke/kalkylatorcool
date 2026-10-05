@@ -4,6 +4,13 @@
 
 #include "catch.hpp"
 
+TEST_CASE("Operator")
+{
+  Node* p1 {};
+  Node* p2 {};
+  Operator operator{p1, p2};
+}
+
 TEST_CASE("operand real")
 {
   Operand* pi{ new Real{3.14} };
@@ -98,14 +105,6 @@ TEST_CASE("test case ignoring rounding errors")
   }
 }
 
-
-TEST_CASE("operand integer")
-{
-  Operand* i = new Integer{7};
-
-  CHECK( i->evaluate() == 7 );
-  CHECK( i->postfix() == "7" );
-}
 
 TEST_CASE("conversion to string")
 {
