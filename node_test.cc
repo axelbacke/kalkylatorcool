@@ -1,14 +1,19 @@
 #include <limits>
 #include <cmath> // abs
 #include <memory>
-
+//------------------------------------
+#include "Addition.h"
+#include "Subtraction.h"
+#include "Real.h"
+#include "Integer.h"
+//------------------------------------
 #include "catch.hpp"
 
 TEST_CASE("Operator")
 {
-  Node* p1 {};
-  Node* p2 {};
-  Operator operator{p1, p2};
+  Node* l {};
+  Node* r {};
+  Operator op {l, r};
 }
 
 TEST_CASE("operand real")
