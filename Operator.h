@@ -5,7 +5,7 @@ class Operator : public Node
 {
 public:
     // CONSTRUCTORS.
-    Operator();
+    Operator(Node* l, Node* r);
 
     // SPECIAL MEMBER FUNCTIONS.
 
