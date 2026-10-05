@@ -10,7 +10,32 @@ TEST_CASE("operand real")
 
   CHECK( pi->evaluate() == 3.14 );
   CHECK( pi->postfix() == "3.140" );
+
+  Operand* negPi{ new Real{-3.14} };
+
+  CHECK( negPi->evaluate() == -3.14 );
+  CHECK( negPi->postfix() == "-3.140" );
+
+  // Throw error if no argument
+  CHECK_THROWS(new Real{});
 }
+
+TEST_CASE("operand int")
+{
+  Operand* ten{ new Integer{10} };
+
+  CHECK( ten->evaluate() == 10 );
+  CHECK( ten->postfix() == "10" );
+
+  Operand* negTen{ new Integer{-10} };
+
+  CHECK( negTen->evaluate() == -10 );
+  CHECK( negTen->postfix() == "-10" );
+
+  // Throw error if no argument
+  CHECK_THROWS(new Integer{});
+}
+
 
 #if 0 // Flytta ned denna rad fÃ¶r att aktivera nÃ¤sta TEST_CASE
 
