@@ -32,11 +32,9 @@ double Subtraction::evaluate() const
     return (left->evaluate() - right->evaluate());
 }
 
-string Subtraction::postfix() const
+string Subtraction::symbol() const
 {
-    stringstream ss {};
-    ss << left->postfix() + " " + right->postfix() + " -";
-    return ss.str();
+    return "-";
 }
 //--------------------------------------------------
 // END OF MEMBER FUNCTIONS -------------------------

@@ -34,11 +34,9 @@ double Addition::evaluate() const
     return (left->evaluate() + right->evaluate());
 }
 
-string Addition::postfix() const
+string Addition::symbol() const
 {
-    stringstream ss {};
-    ss << left->postfix() + " " + right->postfix() + " +";
-    return ss.str();
+    return "+";
 }
 
 //--------------------------------------------------

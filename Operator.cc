@@ -27,6 +27,12 @@ Operator::Operator(Node* l, Node* r)
 // NON-CONST MEMBER FUNCTIONS:
 
 // CONST MEMBER FUNCTIONS:
+string Operator::postfix() const
+{   
+    stringstream ss {};
+    ss << left->postfix() + " " + right->postfix() + " " + symbol();
+    return ss.str();
+}
 
 //--------------------------------------------------
 // END OF MEMBER FUNCTIONS -------------------------
