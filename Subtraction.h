@@ -13,10 +13,11 @@ public:
 
     // CONST MEMBER FUNCTIONS.
     double evaluate() const override;
-    std::string postfix() const override;
 
     // NON-CONST MEMBER FUNCTIONS.
 protected:
+    std::string symbol() const override;
+
 private:
 
 };
