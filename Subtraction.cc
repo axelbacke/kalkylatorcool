@@ -17,7 +17,7 @@ using namespace std;
 
 //CONSTRUCTOR:
 Subtraction::Subtraction(Node* left, Node* right)
-    : Operator{Node* left, Node* right}
+    : Operator{left, right}
 {}
 
 // SPECIAL MEMBER FUNCTIONS:
@@ -27,13 +27,16 @@ Subtraction::Subtraction(Node* left, Node* right)
 // NON-CONST MEMBER FUNCTIONS:
 
 // CONST MEMBER FUNCTIONS:
-double evaluate() const override
+double Subtraction::evaluate() const
 {
     return (left->evaluate() - right->evaluate());
 }
-std::string postfix() const override
+
+string Subtraction::postfix() const
 {
-    return "   ";
+    stringstream ss {};
+    ss << left->postfix() + " " + right->postfix() + " -";
+    return ss.str();
 }
 //--------------------------------------------------
 // END OF MEMBER FUNCTIONS -------------------------

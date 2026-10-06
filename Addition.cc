@@ -18,9 +18,8 @@ using namespace std;
 
 //CONSTRUCTOR:
 Addition::Addition(Node* left, Node* right)
-    : Operator{Node* left, Node* right}
+    : Operator{left, right}
 {
-
 }
 
 // SPECIAL MEMBER FUNCTIONS:
@@ -30,13 +29,16 @@ Addition::Addition(Node* left, Node* right)
 // NON-CONST MEMBER FUNCTIONS:
 
 // CONST MEMBER FUNCTIONS:
-double evaluate() const override
+double Addition::evaluate() const
 {
-    return (left->evaluate() + left->evaluate());
+    return (left->evaluate() + right->evaluate());
 }
-std::string postfix() const override
+
+string Addition::postfix() const
 {
-    return "   ";
+    stringstream ss {};
+    ss << left->postfix() + " " + right->postfix() + " +";
+    return ss.str();
 }
 
 //--------------------------------------------------
