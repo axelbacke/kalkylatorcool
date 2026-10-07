@@ -21,12 +21,6 @@ Integer::Integer(int const val)
     : value {val}
 {}
 
-Integer::Integer()
-    : value {0}
-{
-    throwSyntaxError();
-}
-
 // SPECIAL MEMBER FUNCTIONS:
 
 // PRIVATE MEMBER FUNCTIONS:

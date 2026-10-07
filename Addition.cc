@@ -34,9 +34,9 @@ double Addition::evaluate() const
     return (left->evaluate() + right->evaluate());
 }
 
-string Addition::symbol() const
+char Addition::symbol() const
 {
-    return "+";
+    return '+';
 }
 
 //--------------------------------------------------

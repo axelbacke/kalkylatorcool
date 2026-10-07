@@ -16,7 +16,7 @@ public:
 
     // NON-CONST MEMBER FUNCTIONS.
 protected:
-    std::string symbol() const override;
+    char symbol() const override;
 
 private:
 

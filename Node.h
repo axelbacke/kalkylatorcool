@@ -17,12 +17,6 @@ public:
     virtual ~Node() = default;
 
 protected:
-    // ERROR MESSAGES
-    void throwSyntaxError() const;
-    void throwBaseError() const;
-    void throwValueError() const;
-    void throwOverflowError() const;
-    void throwUnderflowError() const;
 
 private:
 
