@@ -33,7 +33,7 @@ double Power::evaluate() const
 {
     double rightVal {right->evaluate()};
     double leftVal {left->evaluate()};
-    if (leftVal < 0 && (fmod(rightVal, 1) == 0.0)) throw logic_error("DOMAIN ERROR");
+    if (leftVal < 0 && (fmod(rightVal, 1) != 0.0)) throw logic_error("DOMAIN ERROR");
     else if (leftVal == 0 && rightVal < 0) throw logic_error("DOMAIN ERROR");
     else return pow(left->evaluate(), right->evaluate());
 }

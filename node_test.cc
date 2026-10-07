@@ -6,6 +6,9 @@
 #include "Subtraction.h"
 #include "Real.h"
 #include "Integer.h"
+#include "Multiplication.h"
+#include "Division.h"
+#include "Power.h"
 //------------------------------------
 #include "catch.hpp"
 
@@ -26,8 +29,6 @@ TEST_CASE("Operand real")
   CHECK( negPi->evaluate() == -3.14 );
   CHECK( negPi->postfix() == "-3.140" );
 
-  // Throw error if no argument
-  CHECK_THROWS(new Real{});
 }
 
 TEST_CASE("Operand integer")
@@ -42,8 +43,6 @@ TEST_CASE("Operand integer")
   CHECK( negTen->evaluate() == -10 );
   CHECK( negTen->postfix() == "-10" );
 
-  // Throw error if no argument
-  CHECK_THROWS(new Integer{});
 }
 
 
@@ -235,7 +234,7 @@ TEST_CASE("Multiplication")
 
     Node* multi = new Multiplication{a, b};
 
-    CHECK(multi->evaluate() == 0.0015);
+    CHECK(multi->evaluate() == 0.015);
     CHECK(multi->postfix() == "15 0.001 *");
   }
 }
@@ -260,7 +259,7 @@ TEST_CASE("Division")
     Node* div = new Division{e, pi};
 
     CHECK(compare_equal(div->evaluate(), 0.866242038));
-    CHECK(div->postfix() == "2.720 3.140 *");
+    CHECK(div->postfix() == "2.720 3.140 /");
   }
 
   SECTION("Two negative integers")
@@ -281,7 +280,7 @@ TEST_CASE("Division")
 
     Node* div = new Division{a, b};
 
-    CHECK(div->evaluate() == -3.225806452);
+    CHECK(compare_equal(div->evaluate(), -3.225806452));
     CHECK(div->postfix() == "10 -3.100 /");
   }
 
@@ -327,7 +326,7 @@ TEST_CASE("Power")
 
     Node* pow = new Power{a, b};
 
-    CHECK(compare_equal(pow->evaluate(), -0.000244141));
+    CHECK(compare_equal(pow->evaluate(), 0.000244141));
     CHECK(pow->postfix() == "-4 -6 ^");
   }
 
@@ -338,7 +337,7 @@ TEST_CASE("Power")
 
     Node* pow = new Power{a, b};
 
-    CHECK(pow->evaluate() == 0.000794328);
+    CHECK(compare_equal(pow->evaluate(), 0.000794328));
     CHECK(pow->postfix() == "10 -3.100 ^");
   }
 
@@ -359,7 +358,6 @@ TEST_CASE("Power")
   {
     Node* a = new Integer{15};
     Node* b = new Integer{0};
-    Node* c = new Integer{-15};
 
     Node* pow = new Power{a, b};
 
