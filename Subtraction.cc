@@ -32,9 +32,9 @@ double Subtraction::evaluate() const
     return (left->evaluate() - right->evaluate());
 }
 
-string Subtraction::symbol() const
+char Subtraction::symbol() const
 {
-    return "-";
+    return '-';
 }
 //--------------------------------------------------
 // END OF MEMBER FUNCTIONS -------------------------

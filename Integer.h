@@ -8,7 +8,6 @@ class Integer : public Operand
 public:
     // CONSTRUCTORS.
     Integer(int const value);
-    Integer();
     // SPECIAL MEMBER FUNCTIONS.
 
     // CONST MEMBER FUNCTIONS.

@@ -21,11 +21,6 @@ Real::Real (double const val)
     : value {val}
 {}
 
-Real::Real ()
-    : value {}
-{
-    throwSyntaxError();
-}
 // SPECIAL MEMBER FUNCTIONS:
 
 // PRIVATE MEMBER FUNCTIONS:
