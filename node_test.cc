@@ -172,6 +172,213 @@ TEST_CASE("Subtraction")
 }
 
 
+TEST_CASE("Multiplication")
+{
+  
+  // Done each iteration of the TEST_CASE
+  Node* pi = new Real{3.14};
+  Node* e = new Real{2.72};
+
+  SECTION("Multiplication case pi*e")
+  {
+    Node* multi = new Multiplication{pi, e};
+    
+    CHECK(compare_equal(multi->evaluate(), 8.5408));
+    CHECK(multi->postfix() == "3.140 2.720 *");
+  }
+  
+  SECTION("Multiplication case e*pi")
+  {
+    Node* multi = new Multiplication{e, pi};
+
+    CHECK(compare_equal(multi->evaluate(), 8.5408));
+    CHECK(multi->postfix() == "2.720 3.140 *");
+  }
+
+  SECTION("Two negative integers")
+  {
+    Node* a = new Integer{-4};
+    Node* b = new Integer{-6};
+
+    Node* multi = new Multiplication{a, b};
+
+    CHECK(multi->evaluate() == 24);
+    CHECK(multi->postfix() == "-4 -6 *");
+  }
+
+  SECTION("Positive integer * negative real")
+  {
+    Node* a = new Integer{10};
+    Node* b = new Real{-3.1};
+
+    Node* multi = new Multiplication{a, b};
+
+    CHECK(multi->evaluate() == -31);
+    CHECK(multi->postfix() == "10 -3.100 *");
+  }
+
+  SECTION("Multiplication with zero")
+  {
+    Node* a = new Integer{15};
+    Node* b = new Integer{0};
+
+    Node* multi = new Multiplication{a, b};
+
+    CHECK(multi->evaluate() == 0);
+    CHECK(multi->postfix() == "15 0 *");
+  }
+
+  SECTION("Multiplication with close to zero")
+  {
+    Node* a = new Integer{15};
+    Node* b = new Real{0.001};
+
+    Node* multi = new Multiplication{a, b};
+
+    CHECK(multi->evaluate() == 0.0015);
+    CHECK(multi->postfix() == "15 0.001 *");
+  }
+}
+
+TEST_CASE("Division")
+{
+  
+  // Done each iteration of the TEST_CASE
+  Node* pi = new Real{3.14};
+  Node* e = new Real{2.72};
+
+  SECTION("Division case pi*e")
+  {
+    Node* div = new Division{pi, e};
+    
+    CHECK(compare_equal(div->evaluate(), 1.154411765));
+    CHECK(div->postfix() == "3.140 2.720 /");
+  }
+  
+  SECTION("Division case e*pi")
+  {
+    Node* div = new Division{e, pi};
+
+    CHECK(compare_equal(div->evaluate(), 0.866242038));
+    CHECK(div->postfix() == "2.720 3.140 *");
+  }
+
+  SECTION("Two negative integers")
+  {
+    Node* a = new Integer{-4};
+    Node* b = new Integer{-6};
+
+    Node* div = new Division{a, b};
+
+    CHECK(compare_equal(div->evaluate(), 0.66666667));
+    CHECK(div->postfix() == "-4 -6 /");
+  }
+
+  SECTION("Positive integer * negative real")
+  {
+    Node* a = new Integer{10};
+    Node* b = new Real{-3.1};
+
+    Node* div = new Division{a, b};
+
+    CHECK(div->evaluate() == -3.225806452);
+    CHECK(div->postfix() == "10 -3.100 /");
+  }
+
+  SECTION("Division with zero")
+  {
+    Node* a = new Integer{15};
+    Node* b = new Integer{0};
+
+    Node* div = new Division{a, b};
+
+    CHECK_THROWS(div->evaluate());
+    CHECK(div->postfix() == "15 0 /");
+  }
+}
+
+TEST_CASE("Power")
+{
+  
+  // Done each iteration of the TEST_CASE
+  Node* pi = new Real{3.14};
+  Node* e = new Real{2.72};
+
+  SECTION("Power case pi^e")
+  {
+    Node* pow = new Power{pi, e};
+    
+    CHECK(compare_equal(pow->evaluate(), 22.47235789));
+    CHECK(pow->postfix() == "3.140 2.720 ^");
+  }
+  
+  SECTION("Power case e^pi")
+  {
+    Node* pow = new Power{e, pi};
+
+    CHECK(compare_equal(pow->evaluate(), 23.14975284));
+    CHECK(pow->postfix() == "2.720 3.140 ^");
+  }
+
+  SECTION("Two negative integers")
+  {
+    Node* a = new Integer{-4};
+    Node* b = new Integer{-6};
+
+    Node* pow = new Power{a, b};
+
+    CHECK(compare_equal(pow->evaluate(), -0.000244141));
+    CHECK(pow->postfix() == "-4 -6 ^");
+  }
+
+  SECTION("Positive integer ^ negative real")
+  {
+    Node* a = new Integer{10};
+    Node* b = new Real{-3.1};
+
+    Node* pow = new Power{a, b};
+
+    CHECK(pow->evaluate() == 0.000794328);
+    CHECK(pow->postfix() == "10 -3.100 ^");
+  }
+
+  SECTION("Negative number ^ real")
+  {
+    Node* a = new Integer{-10};
+    Node* b = new Real{3.1};
+    Node* c = new Real{-3.1};
+
+    Node* pow1 = new Power{a, b};
+    Node* pow2 = new Power{a, c};
+
+    CHECK_THROWS(pow1->evaluate());
+    CHECK_THROWS(pow2->evaluate());
+  }
+
+  SECTION("Power with zero")
+  {
+    Node* a = new Integer{15};
+    Node* b = new Integer{0};
+    Node* c = new Integer{-15};
+
+    Node* pow = new Power{a, b};
+
+    CHECK(pow->evaluate() == 1);
+    CHECK(pow->postfix() == "15 0 ^");
+  }
+
+  SECTION("0 ^ negative number")
+  {
+    Node* a = new Integer{0};
+    Node* b = new Integer{-15};
+
+    Node* pow = new Power{a, b};
+
+    CHECK_THROWS(pow->evaluate());
+    CHECK(pow->postfix() == "0 -15 ^");
+  }
+}
+
 TEST_CASE("Test case ignoring rounding errors")
 {
   Node* a = new Real{0.01};
@@ -190,6 +397,7 @@ TEST_CASE("Test case ignoring rounding errors")
     CHECK( compare_equal(plus->evaluate(), 0.1) );
   }
 }
+
 
 #if 0 // Flytta ned denna rad fÃ¶r att aktivera nÃ¤sta TEST_CASE
 
