@@ -7,6 +7,8 @@ class Operator : public Node
 {
 public:
     // SPECIAL MEMBER FUNCTIONS.
+    Operator(Operator const&) = delete;
+    Operator& operator=(Operator const&) = delete;
     
     // CONST MEMBER FUNCTIONS.
     std::string postfix() const override;
