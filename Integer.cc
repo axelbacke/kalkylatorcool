@@ -36,7 +36,7 @@ Integer::Integer()
 // CONST MEMBER FUNCTIONS:
 double Integer::evaluate() const
 {
-    return double {value};
+    return value;
 }
 
 string Integer::postfix() const
