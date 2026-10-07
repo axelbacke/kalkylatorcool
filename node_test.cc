@@ -284,7 +284,7 @@ TEST_CASE("Division")
     CHECK(div->postfix() == "10 -3.100 /");
   }
 
-  SECTION("Division with zero")
+  SECTION("Division with integer zero")
   {
     Node* a = new Integer{15};
     Node* b = new Integer{0};
@@ -293,6 +293,61 @@ TEST_CASE("Division")
 
     CHECK_THROWS(div->evaluate());
     CHECK(div->postfix() == "15 0 /");
+  }
+
+  SECTION("Division with real zero")
+  {
+    Node* a = new Integer{15};
+    Node* b = new Real{0.0};
+
+    Node* div = new Division{a, b};
+
+    CHECK_THROWS(div->evaluate());
+    CHECK(div->postfix() == "15 0.000 /");
+  }
+
+  SECTION("Divide int zero by real zero")
+  {
+    Node* a = new Integer{0};
+    Node* b = new Real{0.0};
+
+    Node* div = new Division{a, b};
+
+    CHECK_THROWS(div->evaluate());
+    CHECK(div->postfix() == "0 0.000 /");
+  }
+  
+  SECTION("Divide real zero by int zero")
+  {
+    Node* a = new Integer{0};
+    Node* b = new Real{0.0};
+
+    Node* div = new Division{b, a};
+
+    CHECK_THROWS(div->evaluate());
+    CHECK(div->postfix() == "0.000 0 /");
+  }
+  
+  SECTION("Divide int zero by int zero")
+  {
+    Node* a = new Integer{0};
+    Node* b = new Integer{0};
+
+    Node* div = new Division{a, b};
+
+    CHECK_THROWS(div->evaluate());
+    CHECK(div->postfix() == "0 0 /");
+  }
+  
+  SECTION("Divide real zero by real zero")
+  {
+    Node* a = new Real{0.0};
+    Node* b = new Real{0.0};
+
+    Node* div = new Division{a, b};
+
+    CHECK_THROWS(div->evaluate());
+    CHECK(div->postfix() == "0.000 0.000 /");
   }
 }
 
@@ -396,28 +451,55 @@ TEST_CASE("Test case ignoring rounding errors")
   }
 }
 
+TEST_CASE("Nested operator")
+{
+  Node* s = new Subtraction(new Real{3.0}, new Integer{1});
+  Node* m = new Multiplication(new Integer{2}, new Integer{5});
+  
+  SECTION("Doubly nested")
+  {
+    Node* a = new Addition(s, m);
 
-#if 0 // Flytta ned denna rad fÃ¶r att aktivera nÃ¤sta TEST_CASE
+    CHECK(a->evaluate() == 12);
+    CHECK(a->postfix() == "3.000 1 - 2 5 * +");
+  }
+
+  SECTION("Triply (?) nested")
+  {
+    Node* a = new Division(new Addition(s, m), new Multiplication(s, m));
+
+    CHECK(a->evaluate() == 0.6);
+    CHECK(a->postfix() == "3.000 1 - 2 5 * + 3.000 1 - 2 5 * * /");
+  }
+
+  SECTION("Check nested division error")
+  {
+    Node* a = new Division(new Multiplication(new Integer{2}, new Integer{1}), 
+                           new Addition(new Integer{1}, new Integer{-1})
+                          );
+    CHECK_THROWS(a->evaluate());
+    CHECK(a->postfix() == "2 1 * 1 -1 + /");
+  }
+
+
+}
 
 TEST_CASE("Conversion to string")
 {
-    Node* a = new Addition{ new Subtraction{ new Real{1.0},
-                                             new Integer{1} },
-                            new Multiplication{ new Integer{2},
-                                                new Integer{5} }
-    };
-    SECTION("Prefix")
-    {
-        CHECK( a->prefix() == "+ - 1.000 1 * 2 5" );
-    }
-    SECTION("Infix")
-    {
-        CHECK( a->infix() == "( ( 1.000 - 1 ) + ( 2 * 5 ) )" );
-    }
-    SECTION(">Postfix")
-    {
-        CHECK( a->postfix() == "1.000 1 - 2 5 * +" );
-    }
-}
+  Node* s = new Subtraction(new Real{1.0}, new Integer{1});
+  Node* m = new Multiplication(new Integer{2}, new Integer{5});
+  Node* a = new Addition(s, m);
 
-#endif
+  SECTION("Postfix")
+  {
+    CHECK(a->postfix() == "1.000 1 - 2 5 * +");
+  }
+  SECTION("Infix")
+  {
+    CHECK(a->infix() == "( ( 1.000 - 1 ) + ( 2 * 5 ) )");
+  }
+  SECTION("Prefix")
+  {
+    CHECK(a->prefix() == "+ - 1.000 1 * 2 5");
+  }
+}

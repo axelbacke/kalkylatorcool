@@ -30,7 +30,20 @@ Operator::Operator(Node* l, Node* r)
 string Operator::postfix() const
 {   
     stringstream ss {};
-    ss << left->postfix() + " " + right->postfix() + " " + symbol();
+    ss << left->postfix() << ' ' << right->postfix() << ' ' << symbol();
+    return ss.str();
+}
+
+string Operator::infix() const
+{
+    stringstream ss {};
+    ss << "( " << left->infix() << ' ' << symbol() << ' ' << right->infix() << " )";
+    return ss.str();
+}
+string Operator::prefix() const
+{
+    stringstream ss {};
+    ss << symbol() << ' ' << left->prefix() << ' ' << right->prefix();
     return ss.str();
 }
 
