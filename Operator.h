@@ -12,6 +12,8 @@ public:
     
     // CONST MEMBER FUNCTIONS.
     std::string postfix() const override;
+    std::string infix() const override;
+    std::string prefix() const override;
 
     // NON-CONST MEMBER FUNCTIONS.
 protected:
