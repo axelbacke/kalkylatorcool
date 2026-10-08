@@ -16,9 +16,8 @@ public:
     std::string postfix() const override;
     // NON-CONST MEMBER FUNCTIONS.
 protected:
-    int value;
 private:
-
+    int value;
 };
 
 #endif
