@@ -8,6 +8,7 @@
 #include "Power.h"
 #include "postfix.h"
 
+#include <iostream>
 #include <sstream>
 #include <string>
 #include <cctype>
@@ -60,9 +61,9 @@ Expression::Expression(string const& infix)
                 nodeStack.push(new Real{word});
             }
             
-            catch 
+            catch (...)
             {
-                cout << "INVALID INPUT: " << word << endl; 
+                throw logic_error("INVALID INPUT");
             }
         }
         else
