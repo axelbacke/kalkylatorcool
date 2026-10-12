@@ -6,11 +6,11 @@ class Expression
 {
 public:
     // CONSTRUCTORS.
-    Expression(std::string const& postfix);
+    Expression(std::string const& infix);
     // SPECIAL MEMBER FUNCTIONS.
 
     // CONST MEMBER FUNCTIONS.
-    std::string toInfix() const;
+    std::string toString() const;
     double evaluate() const;
     // NON-CONST MEMBER FUNCTIONS.
 protected:

@@ -6,6 +6,7 @@
 #include "Multiplication.h"
 #include "Division.h"
 #include "Power.h"
+#include "postfix.h"
 
 #include <sstream>
 #include <string>
@@ -30,10 +31,11 @@ using namespace std;
 //--------------------------------------------------
 
 //CONSTRUCTOR:
-Expression::Expression(string const& postfix)
+Expression::Expression(string const& infix)
     : root {nullptr}
 {
-    istringstream iss {postfix};
+    Postfix postfix {infix};
+    istringstream iss {postfix.to_string()};
     
     Node* nodePtr {nullptr};
     Node* left {nullptr};
@@ -98,7 +100,7 @@ Expression::Expression(string const& postfix)
 // NON-CONST MEMBER FUNCTIONS:
 
 // CONST MEMBER FUNCTIONS:
-string Expression::toInfix() const
+string Expression::toString() const
 {
     return root->infix();
 }
