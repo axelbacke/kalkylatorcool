@@ -14,6 +14,8 @@ public:
     Expression(Expression && other);
     Expression& operator=(Expression && rhs);
 
+    ~Expression();
+
     // CONST MEMBER FUNCTIONS.
     std::string toInfix() const;
     std::string toPrefix() const;
