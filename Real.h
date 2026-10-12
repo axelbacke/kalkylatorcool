@@ -8,6 +8,7 @@ class Real : public Operand
 public:
     // CONSTRUCTORS.
     Real(double const val);
+    Real(std::string const& str);
     // SPECIAL MEMBER FUNCTIONS.
     ~Real() = default;
     // CONST MEMBER FUNCTIONS.

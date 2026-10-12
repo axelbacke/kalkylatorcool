@@ -21,6 +21,12 @@ Real::Real (double const val)
     : value {val}
 {}
 
+Real::Real(string const& str)
+    : value {}
+{
+    istringstream iss {str};
+    iss >> value;
+}
 // SPECIAL MEMBER FUNCTIONS:
 
 // PRIVATE MEMBER FUNCTIONS:
