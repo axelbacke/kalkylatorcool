@@ -9,6 +9,7 @@ public:
     // SPECIAL MEMBER FUNCTIONS.
     Operator(Operator const&) = delete;
     Operator& operator=(Operator const&) = delete;
+    ~Operator() override;
     
     // CONST MEMBER FUNCTIONS.
     std::string postfix() const override;
