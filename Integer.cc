@@ -1,6 +1,5 @@
 #include "Integer.h"
 
-
 using namespace std;
 
 //--------------------------------------------------
@@ -21,6 +20,12 @@ Integer::Integer(int const val)
     : value {val}
 {}
 
+Integer::Integer(string const& str)
+    : value {}
+{
+    istringstream iss {str};
+    iss >> value;
+}
 // SPECIAL MEMBER FUNCTIONS:
 
 // PRIVATE MEMBER FUNCTIONS:

@@ -9,6 +9,7 @@
 #include "Multiplication.h"
 #include "Division.h"
 #include "Power.h"
+#include "Expression.h"
 //------------------------------------
 #include "catch.hpp"
 
@@ -19,6 +20,13 @@ bool compare_equal(double a, double b)
 
 TEST_CASE("Operand real")
 {
+  SECTION("String constructor")
+  {
+    Operand* pi{ new Real{"3.14"} };
+    CHECK( pi->evaluate() == 3.14 );
+    CHECK( pi->postfix() == "3.140" );
+  }
+
   Operand* pi{ new Real{3.14} };
 
   CHECK( pi->evaluate() == 3.14 );
@@ -33,6 +41,12 @@ TEST_CASE("Operand real")
 
 TEST_CASE("Operand integer")
 {
+  SECTION("String constructor")
+  {
+    Operand* integer{ new Integer{"300"} };
+    CHECK( integer->evaluate() == 300 );
+    CHECK( integer->postfix() == "300" );
+  }
   Operand* ten{ new Integer{10} };
 
   CHECK( ten->evaluate() == 10 );
@@ -501,5 +515,40 @@ TEST_CASE("Conversion to string")
   SECTION("Prefix")
   {
     CHECK(a->prefix() == "+ - 1.000 1 * 2 5");
+  }
+}
+
+
+TEST_CASE("Expression")
+{
+  SECTION("Constructor")
+  {
+    CHECK_THROWS(Expression{""});
+
+    Expression e {"+ 3 4"};
+    CHECK(e.toInfix() == "( 3 + 4 )");
+    CHECK(e.evaluate() == 7);
+
+    Expression e1 {"+ - 4 7 * 3 4"};
+    CHECK(e1.toInfix() == "( 4 - 7 ) + ( 3 * 4 )");
+    CHECK(e1.evaluate() == 9);
+
+    Expression e2 {"/ 7 0"};
+  }
+  SECTION("toInfix")
+  {
+    Expression e1 {"- ^ * 0 3 7 + 4 3"};
+    CHECK(e1.toInfix() == "( ( 0 * 3 ) ^ 7 ) - ( 4 + 3 )")
+
+    Expression e2 {"/ 7 0"};
+    CHECK(e2.toInfix() == "( 7 / 0 )");
+  }
+  SECTION("evaluate")
+  {
+    Expression e1 {"- ^ * 0 3 7 + 4 3"};
+    CHECK(e1.evaluate() == -7);
+
+    Expression e2 {"/ 7 0"};
+    CHECK_THROWS(e2.evaluate());
   }
 }
