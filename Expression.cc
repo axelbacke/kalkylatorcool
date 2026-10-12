@@ -15,6 +15,7 @@
 #include <algorithm>
 #include <stack>
 #include <stdexcept>
+#include <memory>
 
 using namespace std;
 
@@ -40,10 +41,10 @@ Expression::Expression(string const& infix)
         Postfix postfix {infix};
         istringstream iss {postfix.to_string()};
         
-        Node* nodePtr {nullptr};
-        Node* left {nullptr};
-        Node* right {nullptr};
-        stack<Node*> nodeStack {};
+        unique_ptr<Node> nodePtr {nullptr};
+        unique_ptr<Node> left {nullptr};
+        unique_ptr<Node> right {nullptr};
+        stack<unique_ptr<Node>> nodeStack {};
 
         string word {};
         while(iss >> word)
@@ -53,14 +54,14 @@ Expression::Expression(string const& infix)
             if ( std::all_of( begin(word), end(word), ::isdigit ) )
             {
                 // Vi har hittat ett heltal
-                nodeStack.push(new Integer{word});
+                nodeStack.push(make_unique<Integer>(word));
             }
             else if ( isdigit(word.at(0)) )
             {
                 // Vi hoppas ordet är ett flyttal
                 try
                 {
-                    nodeStack.push(new Real{word});
+                    nodeStack.push(make_unique<Real>(word));
                 }
                 
                 catch (...)
@@ -75,17 +76,17 @@ Expression::Expression(string const& infix)
                 // CHECK SIZE OF STACK; SHOULD BE 2.
 
                 if (nodeStack.size() < 2) throw logic_error("MISSING OPERAND ERROR"); 
-                right = nodeStack.top();
+                right = std::move(nodeStack.top());
                 nodeStack.pop();
                 
-                left = nodeStack.top();
+                left = std::move(nodeStack.top());
                 nodeStack.pop();
 
-                if (word == "+") nodeStack.push(new Addition{left, right});
-                else if (word == "-") nodeStack.push(new Subtraction{left, right});
-                else if (word == "*") nodeStack.push(new Multiplication{left, right});
-                else if (word == "/") nodeStack.push(new Division{left, right});
-                else if (word == "^") nodeStack.push(new Power{left, right});
+                if (word == "+") nodeStack.push(make_unique<Addition>(left.release(), right.release()));
+                else if (word == "-") nodeStack.push(make_unique<Subtraction>(left.release(), right.release()));
+                else if (word == "*") nodeStack.push(make_unique<Multiplication>(left.release(), right.release()));
+                else if (word == "/") nodeStack.push(make_unique<Division>(left.release(), right.release()));
+                else if (word == "^") nodeStack.push(make_unique<Power>(left.release(), right.release()));
 
                 else throw logic_error("INVALID INPUT: " + word);
                 
@@ -93,7 +94,7 @@ Expression::Expression(string const& infix)
         }
         if (nodeStack.size() > 1) throw logic_error("MISSING OPERATOR ERROR");
         else if (nodeStack.size() == 0) throw logic_error("EMPTY INPUT ERROR");
-        root = nodeStack.top();
+        root = nodeStack.top().release();
     }
 
 }
@@ -111,6 +112,10 @@ Expression& Expression::operator=(Expression && rhs)
 }
 // PRIVATE MEMBER FUNCTIONS:
 
+Expression::~Expression()
+{
+    delete root;
+}
 // NON-CONST MEMBER FUNCTIONS:
 
 // CONST MEMBER FUNCTIONS:

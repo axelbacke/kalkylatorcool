@@ -21,7 +21,11 @@ Operator::Operator(Node* l, Node* r)
 {}
 
 // SPECIAL MEMBER FUNCTIONS:
-
+Operator::~Operator()
+{
+    delete left;
+    delete right;
+}
 // PRIVATE MEMBER FUNCTIONS:
 
 // NON-CONST MEMBER FUNCTIONS:
