@@ -25,7 +25,6 @@ protected:
 
     Node* left;
     Node* right;
-private:
 
 };
 

@@ -22,8 +22,9 @@ public:
     std::string toPostfix() const;
     double evaluate() const;
     // NON-CONST MEMBER FUNCTIONS.
-protected:
+
 private:
+    void throwEmptyExpressionError() const;
     Node* root;
 
 };

@@ -18,9 +18,6 @@ public:
 protected:
     char symbol() const override;
 
-private:
-
-
 };
 
 #endif

@@ -1,0 +1,41 @@
+Information om komplettering:
+  Kompletteringen kan gälla hela filen och alla filer i labben,
+  så får ni komplettering på en sak, kan samma sak förekomma på
+  fler ställen utan att jag skrivit det.
+
+  Komplettering lämnas in via sendlab efter senast en (1) vecka.
+
+  Har ni frågor om kompletteringen kan ni maila mig.
+
+ÅTGÄRDAD
+Komplettering: Ta bort kod som inte fyller något syfte. Ex. "protected"/"private" i Node-klassen gör ingenting.
+
+
+ÅTGÄRDAD VI TOG BORT STRING CONSTRUCTOR. MER FUNKTIONALITET => FLER TESTER; DUMT.
+Komplettering: Alla konstruktorer behöver garantera att klassen skapas korrekt med definierade värden. 
+Det är inte fel att ni har en strängkonstruktor till Integer, men den behöver då göra kontrollen att det som skickas in faktiskt är ett tal. 
+Vad skulle hända om jag skrev ex. Integer i{"hej"}; någonstans som inte är genom ett expression? Samma sak gäller för Real.
+
+
+
+ÅTGÄRDAD
+Komplettering: Initiera alla variabler med måsvingar.
+
+
+ÅTGÄRDAD
+Komplettering: Uttryck beräknas upprepade gånger i onödan i exponent-klassen.
+
+ÅTGÄRDAD
+Komplettering: vid en felaktig inmating ska användaren få ett meddelande om vad
+  som var fel. Detta gäller tex vid kommandon på ett tomt uttryck, felaktiga uttryck,
+  kommandon som inte finns och beräkning av ologiska uttryck.
+
+ÅTGÄRDAD
+Komplettering: Att skriva ex. ":infix" utan uttryck får programmet att krascha.
+
+
+ÅTGÄRDAD
+Komplettering: Att skriva in en blankrad (enter) får utskriften:
+"Error of type: basic_string::at: __n (which is 0) >= this->size() (which is 0)"
+
+

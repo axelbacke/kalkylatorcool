@@ -30,7 +30,7 @@ Division::Division(Node* left, Node* right)
 // CONST MEMBER FUNCTIONS:
 double Division::evaluate() const
 {
-    double rightVal = right->evaluate();
+    double rightVal {right->evaluate()};
     if (rightVal == 0) throw logic_error("DIVSION BY ZERO ERROR");
     else return left->evaluate() / rightVal;
 }

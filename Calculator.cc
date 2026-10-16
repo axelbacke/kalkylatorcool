@@ -12,6 +12,7 @@ int main()
   {
     try
     {
+        if (line.size() == 0) throw logic_error("EMPTY EXPRESSION");
         if (line.at(0) == ':')
         {
             if (line == ":prefix")
@@ -34,6 +35,8 @@ int main()
             {
                 return 0;
             }
+            else throw logic_error("Unknown command '" + line + "'");
+
         }
         else
         {

@@ -18,10 +18,6 @@ public:
     // SPECIAL MEMBER FUNCTIONS
     virtual ~Node() = default;
 
-protected:
-
-private:
-
 };
 
 #endif

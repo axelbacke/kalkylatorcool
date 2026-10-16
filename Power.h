@@ -17,7 +17,6 @@ public:
     // NON-CONST MEMBER FUNCTIONS.
 protected:
     char symbol() const override;
-private:
 
 };
 

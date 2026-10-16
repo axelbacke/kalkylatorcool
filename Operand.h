@@ -15,9 +15,6 @@ public:
     std::string prefix() const override;
 
     // NON-CONST MEMBER FUNCTIONS.
-protected:
-private:
-
 
 };
 

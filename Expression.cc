@@ -54,19 +54,19 @@ Expression::Expression(string const& infix)
             if ( std::all_of( begin(word), end(word), ::isdigit ) )
             {
                 // Vi har hittat ett heltal
-                nodeStack.push(make_unique<Integer>(word));
+                nodeStack.push(make_unique<Integer>(stoi(word)));
             }
             else if ( isdigit(word.at(0)) )
             {
                 // Vi hoppas ordet är ett flyttal
                 try
                 {
-                    nodeStack.push(make_unique<Real>(word));
+                    nodeStack.push(make_unique<Real>(stof(word)));
                 }
                 
                 catch (...)
                 {
-                    throw logic_error("INVALID INPUT");
+                    throw logic_error("INVALID INPUT: " + word);
                 }
             }
             else
@@ -88,7 +88,7 @@ Expression::Expression(string const& infix)
                 else if (word == "/") nodeStack.push(make_unique<Division>(left.release(), right.release()));
                 else if (word == "^") nodeStack.push(make_unique<Power>(left.release(), right.release()));
 
-                else throw logic_error("INVALID INPUT: " + word);
+                else throw logic_error("UNKNOWN OPERATOR: " + word);
                 
             }
         }
@@ -110,32 +110,41 @@ Expression& Expression::operator=(Expression && rhs)
     std::swap(root, rhs.root);
     return *this;
 }
-// PRIVATE MEMBER FUNCTIONS:
 
 Expression::~Expression()
 {
     delete root;
 }
+// PRIVATE MEMBER FUNCTIONS:
+void Expression::throwEmptyExpressionError() const
+{
+    if (root == nullptr) throw logic_error("EMPTY EXPRESSION");
+}
+
 // NON-CONST MEMBER FUNCTIONS:
 
 // CONST MEMBER FUNCTIONS:
 string Expression::toInfix() const
 {
+    throwEmptyExpressionError();
     return root->infix();
 }
 
 string Expression::toPrefix() const
 {
+    throwEmptyExpressionError();
     return root->prefix();
 }
 
 string Expression::toPostfix() const
 {
+    throwEmptyExpressionError();
     return root->postfix();
 }
 
 double Expression::evaluate() const
 {
+    throwEmptyExpressionError();
     return root->evaluate();
 }
 //--------------------------------------------------

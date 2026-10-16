@@ -8,14 +8,13 @@ class Integer : public Operand
 public:
     // CONSTRUCTORS.
     Integer(int const value);
-    Integer(std::string const& str);
     // SPECIAL MEMBER FUNCTIONS.
 
     // CONST MEMBER FUNCTIONS.
     double evaluate() const override;
     std::string postfix() const override;
     // NON-CONST MEMBER FUNCTIONS.
-protected:
+
 private:
     int value;
 };
